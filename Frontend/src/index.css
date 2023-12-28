@@ -7,3 +7,7 @@ html, body {
   color: white;
   font-family: "Poppin", serif;
 }
+
+.image-inverted {
+  filter: invert(100%)
+}
