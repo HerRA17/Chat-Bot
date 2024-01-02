@@ -1,9 +1,26 @@
 import React from 'react';
-// import {  } from "@mui/material";
 import { Box, Typography, Button } from "@mui/material";
+import { IoLogInOutline } from "react-icons/io5";
 import CustomizedInput from '../components/shared/Customizedinput';
+import { useAuth } from '../context/AuthContext';
+import { toast } from "react-hot-toast"
 
 const Login = () => {
+  const auth = useAuth();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    try {
+      toast.loading("Signing In", { id: "login" });
+      await auth?.login(email, password)
+      toast.success("Signed In Successfully", { id: "login" })
+    } catch (error) {
+      console.log(error);
+      toast.error("Sign In Failed", { id: "login" })
+    }
+  }
   return (
     <Box width={"100%"} height={"100%"} display="flex" flex={1}>
       <Box padding={8} mt={8} display={{ md:"flex", sm:"none", xs:"none" }}>
@@ -17,7 +34,9 @@ const Login = () => {
       padding={2}
       ml={"auto"}
       mt={16} >
-        <form style={{
+        <form 
+          onSubmit={(handleSubmit)}
+          style={{
           margin: "auto",
           padding:"30px",
           boxShadow: "10px 10px 20px #000",
@@ -49,7 +68,9 @@ const Login = () => {
                   bgcolor: "white",
                   color: "black"
                 },
-                }}>Login</Button>
+                }}
+                endIcon={<IoLogInOutline />}
+                >Login</Button>
             </Box>
           </form>
       </Box>
