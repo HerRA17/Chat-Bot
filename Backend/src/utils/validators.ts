@@ -24,6 +24,5 @@ export const loginValidator = [
 ]
 
 export const signupValidator = [
-    body("name").notEmpty().withMessage("Name is required"),
-    ...loginValidator
+    body("message").notEmpty().withMessage("Message is required"),
 ]
