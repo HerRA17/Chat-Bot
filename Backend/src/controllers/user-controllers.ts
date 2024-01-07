@@ -50,7 +50,7 @@ export  const userSignup = async (
             httpOnly: true,
             signed: true
         });
-       
+    
         return res
         .status(201)
         .json({ message: "User signed up", name: user.name, email: user.email });
