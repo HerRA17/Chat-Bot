@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token-manager.js";
 import { chatCompletionValidator, validate } from "../utils/validators.js";
-import { generateChatCompletion } from "../controllers/chat-controllers.js";
+import { generateChatCompletion, sendChatsToUser, deleteChats } from "../controllers/chat-controllers.js";
 
 // Protected API
 const chatsRoutes = Router();
@@ -13,7 +13,11 @@ chatsRoutes.post(
 chatsRoutes.get(
     "/all-chats",
     verifyToken,
-    generateChatCompletion);
+    sendChatsToUser);
+chatsRoutes.delete(
+    "/delete",
+    verifyToken,
+    deleteChats);
     
 
 

@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
 import red from "@mui/material/colors/red";
 import { useAuth } from '../context/AuthContext';
 import Chatitem from '../components/chat/Chatitem.tsx';
 import { IoMdSend } from "react-icons/io";
-import { sendChatRequest } from '../components/helpers/api-communicator.ts';
+import { deleteUserChats, getUserChats, sendChatRequest } from '../components/helpers/api-communicator.ts';
+import toast from 'react-hot-toast';
 type Message = {
   role: "user" | "assistant";
   content: string;
@@ -24,6 +25,31 @@ const Chat = () => {
     const chatData = await sendChatRequest(content);
     setChatMessages([...chatData.chats])
   }
+
+  const handleDeleteChats = async () => {
+    try {
+      toast.loading("Deleting Chats", { id: "deletechats" });
+      await deleteUserChats();
+      setChatMessages([]);
+      toast.success("Deleted Chats Successfully", { id: "deletechats" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Deleting Chats failed", { id: "deletechats" })
+    }
+  }
+
+  useLayoutEffect(() => {
+    if(auth?.isLoggedIn && auth.user) {
+      toast.loading("Loading Chats", { id: "loadchats" });
+      getUserChats().then((data) => {
+        setChatMessages([...data.chats]);
+        toast.success("Successfully loaded chats", { id: "loadchats" })
+      }).catch ((error) => {
+        console.log(error);
+        toast.error("Loading Failed", { id: "loadchats" })
+      })
+    }
+  }, [auth])
   return (
     <Box sx={{ 
       display: "flex",
@@ -66,7 +92,9 @@ const Chat = () => {
               You can ask me questions related to Knowledge, Business, Advices, Education, etc.
               But please, avoid sharing personal information!
             </Typography>
-            <Button sx={{
+            <Button 
+            onClick={handleDeleteChats}
+            sx={{
               width: "200px",
               mx: "auto",
               my: "auto",
