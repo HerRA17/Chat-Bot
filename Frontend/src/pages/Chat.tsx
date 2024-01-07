@@ -4,6 +4,7 @@ import red from "@mui/material/colors/red";
 import { useAuth } from '../context/AuthContext';
 import Chatitem from '../components/chat/Chatitem.tsx';
 import { IoMdSend } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import { deleteUserChats, getUserChats, sendChatRequest } from '../components/helpers/api-communicator.ts';
 import toast from 'react-hot-toast';
 type Message = {
@@ -12,6 +13,7 @@ type Message = {
 } 
 
 const Chat = () => {
+  const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const auth = useAuth();
   const [ chatMessages, setChatMessages ] = useState<Message[]>([]);
@@ -50,6 +52,11 @@ const Chat = () => {
       })
     }
   }, [auth])
+  useEffect(() => {
+    if(!auth?.user) {
+      return navigate("/login");
+    }
+  }, [auth]);
   return (
     <Box sx={{ 
       display: "flex",
