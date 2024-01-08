@@ -23,7 +23,7 @@ const Chat = () => {
       inputRef.current.value = "";
     }
     const newMessage = { role: "user", content };
-    setChatMessages((prev) => [...prev, newMessage])
+    setChatMessages((prev) => [...prev, newMessage]);
     const chatData = await sendChatRequest(content);
     setChatMessages([...chatData.chats])
   }
