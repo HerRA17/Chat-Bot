@@ -55,7 +55,7 @@ export const sendChatsToUser = async (
     }
 };
 
-export const deleteChats async (
+export const deleteChats = async (
     req: Request,
     res: Response,
     next: NextFunction
