@@ -87,10 +87,8 @@ const Chat = () => {
               color: "black",
               fontWeight: 700,
             }}>
-            {chatMessages.map((chat) => (
-            <Chatitem content={chat.content} role={chat.role} key={index} />
-            ))}
-            
+            {auth?.user?.name[0]}
+            {auth?.user?.name.split(" ")[1][0]}            
             </Avatar>
             <Typography sx={{mx: "auto", fontFamily: "work sans"}}>
               You are talking to a ChatBOT
@@ -139,7 +137,9 @@ const Chat = () => {
           overflowX: "hidden",
           scrollBehavior: "smooth"
           }}>
-            {chatMessages.map((chat) => (<div>{chat.content}</div>))}
+            {chatMessages.map((chat, index) =>
+             (<Chatitem content={chat.content} role={chat.role} key={index} />
+             ))}
         </Box>
         <div style={{
           display: "flex",
