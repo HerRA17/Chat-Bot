@@ -169,6 +169,6 @@ const Chat = () => {
       </Box>
     </Box>
   )
-}
+};
 
-export default Chat
+export default Chat;
