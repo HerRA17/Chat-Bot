@@ -37,6 +37,7 @@ export  const userSignup = async (
             httpOnly: true,
             domain: "localhost",
             signed: true,
+            sameSite: "none",
             path: "/"
         });
         
@@ -47,6 +48,7 @@ export  const userSignup = async (
             path: "/",
             domain: "localhost",
             expires,
+            sameSite: "none",
             httpOnly: true,
             signed: true
         });
@@ -105,6 +107,7 @@ export const userLogin = async (
             httpOnly: true,
             domain: "localhost",
             signed: true,
+            sameSite: "none",
             path: "/"
         });
         return res
@@ -135,6 +138,7 @@ export const userLogout = async (
             httpOnly: true,
             domain: "localhost",
             signed: true,
+            sameSite: "none",
             path: "/"
         });
 
