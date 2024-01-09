@@ -1,4 +1,4 @@
-import Header from "./components/Header"
+import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -8,7 +8,7 @@ import Chat from "./pages/Chat";
 import { useAuth } from './context/AuthContext';
 
 function App() {
-const auth = useAuth();
+  const auth = useAuth();
   return (
     <main>
       <Header />
@@ -25,4 +25,4 @@ const auth = useAuth();
   )
 }
 
-export default App
+export default App;
