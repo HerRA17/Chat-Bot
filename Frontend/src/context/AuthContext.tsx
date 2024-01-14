@@ -34,14 +34,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const login = async (email: string, password: string) => {
         const data = await loginUser(email, password);
         if (data) {
-            setUser({email: data.email, name: data.name})
+            setUser({ email: data.email, name: data.name })
             setIsLoggedIn(true);
         } 
     };
     const signup = async (name: string, email: string, password: string) => {
         const data = await signupUser(name, email, password);
         if (data) {
-            setUser({email: data.email, name: data.name})
+            setUser({ email: data.email, name: data.name })
             setIsLoggedIn(true);
         } 
     };
